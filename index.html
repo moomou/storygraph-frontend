@@ -1,67 +1,34 @@
-<!DOCTYPE html5>
+<!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <title>StoryMaps.io</title>
-  <script src="https://use.fontawesome.com/4110e78d29.js"></script>
-  <script src="js/audioRecorder.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <style>
-    html, body {
-      background-color: black;
-      /*background-repeat: no-repeat;*/
-      /*-webkit-background-size: cover;*/
-      /*-moz-background-size: cover;*/
-      /*-o-background-size: cover;*/
-      background-size: cover;
-      /*zoom: 100;*/
-      /*overflow-y: hidden;*/
-      overflow-x: hidden;
-      position: fixed;
+	<title>StoryMaps.me</title>
+	<!-- <script src="https://use.fontawesome.com/4110e78d29.js"></script> -->
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="semantic-ui/semantic.min.css">
 
-      min-width: 100vw;
-      min-height: 100vh;
-
-
-
-    }
-
-
-    .fa-microphone{
-      color: white;
-      top: 0;
-      left: 0;
-      background-color: transparent;
-
-    }
-    .microphone-button{
-      position: relative;
-      padding-left: -25vw;
-      padding-left: -25vw;
-      margin-left: 47vw;
-      margin-top: 40vh;
-
-    }
-
-    .button{
-      background-color: transparent;
-      outline: none;
-      border: none;
-      zoom: 1.5;
-    }
-  </style>
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="semantic-ui/semantic.min.js"></script>
 </head>
 
-<body onload="onloadfunction()">
-  <div class = "microphone-button">
+<body>
 
 
-
-    <button class="button" onclick="window.open('https://www.google.com');" style="background-color: transparent;"><i class="fa fa-microphone fa-5x" aria-hidden="true"></i></button>
-
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h1 class="ui white">
+      <div class="content">
+        Tell us your story
+      </div>
+    </h1>
+    <form class="ui form">
+        <button class="ui icon blue inverted button"><i class="talk icon"></i></button>
+    </form>
+  </div>
 </div>
 
 </body>
-
 </html>

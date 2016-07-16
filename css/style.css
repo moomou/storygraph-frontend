@@ -1,0 +1,34 @@
+body {
+	background-color: white !important;
+}
+body > .grid {
+	height: 100%;
+}
+.image {
+	margin-top: -100px;
+}
+.column {
+	max-width: 450px;
+}
+
+.fa-microphone{
+	color: white;
+	top: 0;
+	left: 0;
+	background-color: transparent;
+}
+
+.microphone-button{
+	position: relative;
+	padding-left: -25vw;
+	padding-left: -25vw;
+	margin-left: 47vw;
+	margin-top: 40vh;
+}
+
+.button{
+	background-color: transparent;
+	outline: none;
+	border: none;
+	zoom: 1.5;
+}
