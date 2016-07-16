@@ -1,10 +1,67 @@
-<!DOCTYPE html>
+<!DOCTYPE html5>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>StoryMaps.io</title>
-  </head>
-  <body>
-    Hello World!!!
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>StoryMaps.io</title>
+  <script src="https://use.fontawesome.com/4110e78d29.js"></script>
+  <script src="js/audioRecorder.js"></script>
+
+  <style>
+    html, body {
+      background-color: black;
+      /*background-repeat: no-repeat;*/
+      /*-webkit-background-size: cover;*/
+      /*-moz-background-size: cover;*/
+      /*-o-background-size: cover;*/
+      background-size: cover;
+      /*zoom: 100;*/
+      /*overflow-y: hidden;*/
+      overflow-x: hidden;
+      position: fixed;
+
+      min-width: 100vw;
+      min-height: 100vh;
+
+
+
+    }
+
+
+    .fa-microphone{
+      color: white;
+      top: 0;
+      left: 0;
+      background-color: transparent;
+
+    }
+    .microphone-button{
+      position: relative;
+      padding-left: -25vw;
+      padding-left: -25vw;
+      margin-left: 47vw;
+      margin-top: 40vh;
+
+    }
+
+    .button{
+      background-color: transparent;
+      outline: none;
+      border: none;
+      zoom: 1.5;
+    }
+  </style>
+</head>
+
+<body onload="onloadfunction()">
+  <div class = "microphone-button">
+
+
+
+    <button class="button" onclick="window.open('https://www.google.com');" style="background-color: transparent;"><i class="fa fa-microphone fa-5x" aria-hidden="true"></i></button>
+
+</div>
+
+</body>
+
 </html>
