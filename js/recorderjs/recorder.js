@@ -17,18 +17,18 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 DEALINGS IN THE SOFTWARE.
 */
 
-(function(window){
+(function(window) {
 
   var WORKER_PATH = 'js/recorderjs/recorderWorker.js';
 
-  var Recorder = function(source, cfg){
+  var Recorder = function(source, cfg) {
     var config = cfg || {};
     var bufferLen = config.bufferLen || 4096;
     this.context = source.context;
-    if(!this.context.createScriptProcessor){
-       this.node = this.context.createJavaScriptNode(bufferLen, 2, 2);
+    if (!this.context.createScriptProcessor) {
+      this.node = this.context.createJavaScriptNode(bufferLen, 2, 2);
     } else {
-       this.node = this.context.createScriptProcessor(bufferLen, 2, 2);
+      this.node = this.context.createScriptProcessor(bufferLen, 2, 2);
     }
 
     var worker = new Worker(config.workerPath || WORKER_PATH);
@@ -41,7 +41,7 @@ DEALINGS IN THE SOFTWARE.
     var recording = false,
       currCallback;
 
-    this.node.onaudioprocess = function(e){
+    this.node.onaudioprocess = function(e) {
       if (!recording) return;
       worker.postMessage({
         command: 'record',
@@ -52,32 +52,36 @@ DEALINGS IN THE SOFTWARE.
       });
     }
 
-    this.configure = function(cfg){
-      for (var prop in cfg){
-        if (cfg.hasOwnProperty(prop)){
+    this.configure = function(cfg) {
+      for (var prop in cfg) {
+        if (cfg.hasOwnProperty(prop)) {
           config[prop] = cfg[prop];
         }
       }
     }
 
-    this.record = function(){
+    this.record = function() {
       recording = true;
     }
 
-    this.stop = function(){
+    this.stop = function() {
       recording = false;
     }
 
-    this.clear = function(){
-      worker.postMessage({ command: 'clear' });
+    this.clear = function() {
+      worker.postMessage({
+        command: 'clear'
+      });
     }
 
     this.getBuffers = function(cb) {
       currCallback = cb || config.callback;
-      worker.postMessage({ command: 'getBuffers' })
+      worker.postMessage({
+        command: 'getBuffers'
+      })
     }
 
-    this.exportWAV = function(cb, type){
+    this.exportWAV = function(cb, type) {
       currCallback = cb || config.callback;
       type = type || config.type || 'audio/wav';
       if (!currCallback) throw new Error('Callback not set');
@@ -87,7 +91,7 @@ DEALINGS IN THE SOFTWARE.
       });
     }
 
-    this.exportMonoWAV = function(cb, type){
+    this.exportMonoWAV = function(cb, type) {
       currCallback = cb || config.callback;
       type = type || config.type || 'audio/wav';
       if (!currCallback) throw new Error('Callback not set');
@@ -97,16 +101,16 @@ DEALINGS IN THE SOFTWARE.
       });
     }
 
-    worker.onmessage = function(e){
+    worker.onmessage = function(e) {
       var blob = e.data;
       currCallback(blob);
     }
 
     source.connect(this.node);
-    this.node.connect(this.context.destination);   // if the script node is not connected to an output the "onaudioprocess" event is not triggered in chrome.
+    this.node.connect(this.context.destination); // if the script node is not connected to an output the "onaudioprocess" event is not triggered in chrome.
   };
 
-  Recorder.setupDownload = function(blob, filename){
+  Recorder.setupDownload = function(blob, filename) {
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
 
     var fd = new FormData();
@@ -124,8 +128,9 @@ DEALINGS IN THE SOFTWARE.
         jQuery("#mainbody").append("<div class='sixteen wide column' id='right'></div>");
         jQuery("#left").append("<div class='ui middle aligned center aligned row' id='top'></div>");
         jQuery("#left").append("<div class='row' id='bottom'></div>");
-        jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left' style='min-height:100vh;'></div>");
+        jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left' ></div>");
         jQuery("#top-left").append("<div class='sixteen wide column' id='text-align'></div>");
+        jQuery("#bottom").append("<svg width='960' height='900'></svg>");
         // jQuery("#text-align").append("<div class='content' id='content'></div>");
         // jQuery("#content").append("<h1 class='content1' id='content1'></h1>");
 
@@ -144,7 +149,7 @@ DEALINGS IN THE SOFTWARE.
 
           var access = new XMLHttpRequest();
 
-          access.open("POST", "http://130.211.127.78:3033/syntaxnet", true);
+          access.open("POST", "http://130.211.127.78:5000/syntaxnet", true);
           access.setRequestHeader("content-type", "application/json");
           access.send(JSON.stringify({
             input: j.text.results[i].alternatives[0].transcript,
@@ -153,17 +158,23 @@ DEALINGS IN THE SOFTWARE.
 
 
           access.onload = function() {
-              if (this.status >= 200 && this.status < 300) {
-                var c = JSON.parse(this.response);
-                console.log("response", c);
-  //               for (var i in c.text.results) {
-  //                 console.log("results syntaxnet 1.0", c.text.results[i]);
-  //                 console.log("results syntaxnet 2.0",  c.text.results[i].alternatives[0].transcript);
-  // }
-              }
-              else{
-                console.log(this.response);
-              }
+            if (this.status >= 200 && this.status < 300) {
+              var res = JSON.parse(this.response);
+              var nodes = res.nodes;
+              var summary = res.summary;
+
+              console.log("response", summary);
+              viz(nodes);
+
+              // for (var i = 0; i < c.length; i++) {
+              //   console.log("results syntaxnet 1.0", c[i]);
+              //
+              //
+              // }
+
+            } else {
+              console.log(this.response);
+            }
 
 
 
@@ -173,7 +184,6 @@ DEALINGS IN THE SOFTWARE.
 
 
         document.getElementById('right').innerHTML = 'HELLO RIGHT WORLD!!!!';
-
 
 
 
