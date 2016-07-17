@@ -130,7 +130,7 @@ DEALINGS IN THE SOFTWARE.
         jQuery("#left").append("<div class='row' id='bottom'></div>");
         jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left' ></div>");
         jQuery("#top-left").append("<div class='sixteen wide column' id='text-align'></div>");
-        jQuery("#bottom").append("<svg width='960' height='900'></svg>");
+        jQuery("#bottom").append("<div id='chart'></div>");
         // jQuery("#text-align").append("<div class='content' id='content'></div>");
         // jQuery("#content").append("<h1 class='content1' id='content1'></h1>");
 
@@ -154,19 +154,16 @@ DEALINGS IN THE SOFTWARE.
           access.send(JSON.stringify({
             input: j.text.results[i].alternatives[0].transcript,
           }));
-          console.log("hi");
-
 
           access.onload = function() {
             if (this.status >= 200 && this.status < 300) {
               var res = JSON.parse(this.response);
               var nodes = res.nodes;
               var summary = res.summary;
-
-              console.log("response", summary);
               viz(nodes);
+              console.log("response", summary);
 
-							var description = summary.join(" ")
+							var description = summary.join(" ")      
 
 							var bingAjax = new XMLHttpRequest();
 							bingAjax.open("GET", "http://130.211.127.78:5000/image?q=" + description, true);
@@ -181,35 +178,6 @@ DEALINGS IN THE SOFTWARE.
             }
           }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // var left = document.createElement('div');
-        // left.id = 'left';
-        // var right = document.createElement('div');
-        // right.id = 'right';
-
-
-        // jQuery("#subset").remove();
-
-
-
-        // TODO: build sentence array
-        // go to graph building page, hide all preexisting elements
-
-        // fetch/initiate graph
-        // fetch/initiate story image building
-
       } else {
         console.log(this.response);
       }

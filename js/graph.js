@@ -19,16 +19,20 @@ var POS_TO_NAME = {
 };
 
 function viz(graph) {
-  var svg = d3.select("svg"),
-      width = +svg.attr("width"),
-      height = +svg.attr("height");
+  var svg = d3.select("#chart").append("svg:svg"),
+      width = 500,
+      height = 250;
+
+  svg
+    .style("width", width)
+    .style("height", height);
 
   var color = d3.scaleOrdinal(d3.schemeCategory20);
 
   var simulation = d3.forceSimulation()
-      .force("link", d3.forceLink().id(function(d) { return d.form; }).distance(30))
-      .force("charge", d3.forceManyBody(-50))
-      .force("collide", d3.forceCollide(40).iterations(1))
+      .force("link", d3.forceLink().id(function(d) { return d.form; }).distance(20))
+      .force("charge", d3.forceManyBody(-20))
+      .force("collide", d3.forceCollide(20).iterations(1))
       .force("center", d3.forceCenter(width / 2, height / 2));
 
 
