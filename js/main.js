@@ -60,13 +60,22 @@ function toggleRecording( e ) {
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
-    } else {
-        // start recording
-        if (!audioRecorder)
-            return;
         e.classList.add("recording");
-        audioRecorder.clear();
-        audioRecorder.record();
+    } else {
+        initAudio();
+
+        setTimeout(function(){
+            // start recording
+            if (!audioRecorder)
+                return;
+            e.classList.add("recording");
+            audioRecorder.clear();
+            audioRecorder.record();
+
+            var recordButtonIcon = document.querySelector("#recordButtonIcon");
+            // recordButtonIcon.classList.remove("talk");
+            recordButtonIcon.classList.add("outline");
+        }, 500);
     }
 }
 
@@ -163,10 +172,10 @@ function gotStream(stream) {
 function initAudio() {
         if (!navigator.getUserMedia)
             navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-        if (!navigator.cancelAnimationFrame)
-            navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
-        if (!navigator.requestAnimationFrame)
-            navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
+        // if (!navigator.cancelAnimationFrame)
+        //     navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
+        // if (!navigator.requestAnimationFrame)
+        //     navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
 
     navigator.getUserMedia(
         {
@@ -185,4 +194,4 @@ function initAudio() {
         });
 }
 
-window.addEventListener('load', initAudio );
+// window.addEventListener('load', initAudio );

@@ -32,3 +32,11 @@ body > .grid {
 	border: none;
 	zoom: 1.5;
 }
+
+.fa-microphone{
+  color: white;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+
+}
