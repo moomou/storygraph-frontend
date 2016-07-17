@@ -128,8 +128,8 @@ DEALINGS IN THE SOFTWARE.
         jQuery("#mainbody").append("<div class='sixteen wide column' id='right'></div>");
         jQuery("#left").append("<div class='ui middle aligned center aligned row' id='top'></div>");
         jQuery("#left").append("<div class='row' id='bottom'></div>");
-        jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left' ></div>");
-        jQuery("#top-left").append("<div class='sixteen wide column' id='text-align'></div>");
+        jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left' ><h4></h4></div>");
+        jQuery("#top-left").append("<div class='sixteen wide column' id='text-align'><h3>This is your story</h3></div>");
         jQuery("#bottom").append("<div id='chart'></div>");
         // jQuery("#text-align").append("<div class='content' id='content'></div>");
         // jQuery("#content").append("<h1 class='content1' id='content1'></h1>");
