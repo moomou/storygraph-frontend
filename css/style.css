@@ -1,5 +1,6 @@
 body {
 	background-color: white !important;
+	font-size: 100px;
 }
 body > .grid {
 	height: 100%;
@@ -8,7 +9,18 @@ body > .grid {
 	margin-top: -100px;
 }
 .column {
-	max-width: 450px;
+	max-width: 50vw;
+	/*display: inline-block;
+  vertical-align: middle;
+  line-height: normal;*/
+
+	/*min-height: 50vh;*/
+
+}
+
+.row{
+	min-height: 50vh;
+
 }
 
 .fa-microphone{
