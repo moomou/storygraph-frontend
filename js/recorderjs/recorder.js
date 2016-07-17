@@ -125,11 +125,11 @@ DEALINGS IN THE SOFTWARE.
         jQuery("#subset").remove();
 
         jQuery("#mainbody").append("<div class='sixteen wide column' id='left'></div>");
-        jQuery("#mainbody").append("<div class='sixteen wide column' id='right'></div>");
+        jQuery("#mainbody").append("<div class='sixteen wide column' id='right'><h3>This is your story</h3></div>");
         jQuery("#left").append("<div class='ui middle aligned center aligned row' id='top'></div>");
         jQuery("#left").append("<div class='row' id='bottom'></div>");
-        jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left' ><h4></h4></div>");
-        jQuery("#top-left").append("<div class='sixteen wide column' id='text-align'><h3>This is your story</h3></div>");
+        jQuery("#top").append("<div class='ui middle aligned center aligned grid' id='top-left'><h4></h4></div>");
+        jQuery("#top-left").append("<div class='sixteen wide column' id='text-align'></div>");
         jQuery("#bottom").append("<div id='chart'></div>");
         // jQuery("#text-align").append("<div class='content' id='content'></div>");
         // jQuery("#content").append("<h1 class='content1' id='content1'></h1>");
@@ -143,7 +143,7 @@ DEALINGS IN THE SOFTWARE.
 
         for (var i in j.text.results) {
           console.log(j.text.results[i]);
-          document.getElementById('text-align').innerHTML = document.getElementById('text-align').innerHTML + j.text.results[i].alternatives[0].transcript;
+          document.getElementById('right').innerHTML = document.getElementById('right').innerHTML + j.text.results[i].alternatives[0].transcript + '<br/><hr>';
           // jQuery('#left').text(j.text.results[i].alternatives[0].transcript);
           console.log(j.text.results[i].alternatives[0].transcript);
 
@@ -163,7 +163,7 @@ DEALINGS IN THE SOFTWARE.
               viz(nodes);
               console.log("response", summary);
 
-							var description = summary.join(" ")      
+							var description = summary.join(" ")
 
 							var bingAjax = new XMLHttpRequest();
 							bingAjax.open("GET", "http://130.211.127.78:5000/image?q=" + description, true);
