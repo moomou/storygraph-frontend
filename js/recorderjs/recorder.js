@@ -113,9 +113,14 @@ DEALINGS IN THE SOFTWARE.
     // link.download = filename || 'output.wav';
     console.log("filename", filename);
     console.log("url", url);
+
+    var fd = new FormData();
+    fd.append('fname', filename);
+    fd.append('data', blob);
+
     var ajax = new XMLHttpRequest();
-    ajax.open("POST", "http://localhost:5000/nlp");
-    ajax.send(filename);
+    ajax.open("POST", "http://localhost:5000/nlp", true);
+    ajax.send(fd);
     ajax.onload = function() {
       if (this.status >= 200 && this.status < 300) {
         console.log(this.response);
