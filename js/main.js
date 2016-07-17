@@ -38,19 +38,14 @@ function saveAudio() {
 }
 
 function gotBuffers( buffers ) {
-
-
     // the ONLY time gotBuffers is called is right after a new recording is completed -
     // so here's where we should set up the download.
     audioRecorder.exportWAV( doneEncoding );
-    console.log("doneEncoding", doneEncoding);
 }
 
 function doneEncoding( blob ) {
     // Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
     Recorder.setupDownload( blob, "audio_wav_file" + ".wav" );
-    recIndex++;
-    console.log("recIndex", recIndex);
 }
 
 function toggleRecording( e ) {
@@ -59,6 +54,8 @@ function toggleRecording( e ) {
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
+
+        // TODO: loading icon
     } else {
         initAudio();
 
@@ -76,6 +73,9 @@ function toggleRecording( e ) {
 
             var recordButtonIcon = document.querySelector("#recordButtonIcon");
             recordButtonIcon.classList.add("outline");
+
+            var deadline = new Date(Date.parse(new Date()) + 30 * 1000);
+            initializeClock("countdown", deadline)
         }, 300);
     }
 }
@@ -157,4 +157,30 @@ function initAudio() {
         });
 }
 
-// window.addEventListener('load', initAudio );
+// COUNTDOWN
+
+function getTimeRemaining(endtime){
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor( (t/1000) % 60 );
+  var minutes = Math.floor( (t/1000/60) % 60 );
+  var hours = Math.floor( (t/(1000*60*60)) % 24 );
+  var days = Math.floor( t/(1000*60*60*24) );
+  return {
+    'total': t,
+    'days': days,
+    'hours': hours,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime){
+  var clock = document.getElementById(id);
+  var timeinterval = setInterval(function(){
+    var t = getTimeRemaining(endtime);
+    clock.innerHTML = t.seconds + 's';
+    if(t.total<=0){
+      clearInterval(timeinterval);
+    }
+  },1000);
+}

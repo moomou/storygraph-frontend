@@ -108,22 +108,28 @@ DEALINGS IN THE SOFTWARE.
 
   Recorder.setupDownload = function(blob, filename){
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
-    // var link = document.getElementById("save");
-    // link.href = url;
-    // link.download = filename || 'output.wav';
-    console.log("filename", filename);
-    console.log("url", url);
 
     var fd = new FormData();
     fd.append('fname', filename);
     fd.append('data', blob);
 
     var ajax = new XMLHttpRequest();
-    ajax.open("POST", "http://localhost:5000/nlp", true);
+    ajax.open("POST", "http://130.211.127.78:5000/nlp", true);
     ajax.send(fd);
     ajax.onload = function() {
       if (this.status >= 200 && this.status < 300) {
-        console.log(this.response);
+        var j = JSON.parse(this.response);
+
+        for (var i in j.text.results) { 
+          console.log(j.text.results[i].alternatives[0].transcript); 
+        }
+
+        // TODO: build sentence array
+        // go to graph building page, hide all preexisting elements
+
+        // fetch/initiate graph
+        // fetch/initiate story image building
+
       } else {
         console.log(this.response);
       }
