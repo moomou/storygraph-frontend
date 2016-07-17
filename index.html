@@ -9,14 +9,20 @@
 	<link rel="stylesheet" href="semantic-ui/semantic.min.css">
 
 	<script src="js/jquery-3.1.0.min.js"></script>
+<<<<<<< HEAD
 	<script src="js/recorderjs/recorder.js"></script>
 	<script src="js/main.js"></script>
+=======
+  <script src="js/recorderjs/recorder.js"></script>
+  <script src="js/main.js"></script>
+>>>>>>> cef7d2d09bf5da04975c6a346a99aa9ccc1a2a01
 	<script src="semantic-ui/semantic.min.js"></script>
 	<!-- <script src="js/d3.min.js"></script>
 	<script src="js/graph.js"></script> -->
 </head>
 <body>
 
+<<<<<<< HEAD
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
 			<h1 class="ui white">
@@ -35,5 +41,33 @@
 			</h1>
 		</div>
 	</div>
+=======
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h1 class="ui white">
+      <div class="content">
+        Tell us your story
+        <div id="viz">
+
+          <button class="ui icon blue inverted button" id="record" onclick="toggleRecording(this);"><i class="talk icon"></i></button>
+          <!-- <img id="record"  onclick="toggleRecording(this);"> -->
+          <a id="save" href="#"><i class="talk icon"></i></a>
+        </div>
+      </div>
+    </h1>
+
+
+    <!-- <form class="ui form" action="/nlp" method="post"> -->
+
+        <div id="controls">
+
+            <button class="ui icon blue inverted button"><i class="talk icon"></i></button>
+            <input type="file" name="datafile">
+            <input type="submit" value="Send">
+        </div>
+    <!-- </form> -->
+  </div>
+</div>
+>>>>>>> cef7d2d09bf5da04975c6a346a99aa9ccc1a2a01
 </body>
 </html>
