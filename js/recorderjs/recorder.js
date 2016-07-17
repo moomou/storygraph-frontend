@@ -141,11 +141,43 @@ DEALINGS IN THE SOFTWARE.
           document.getElementById('text-align').innerHTML = document.getElementById('text-align').innerHTML + j.text.results[i].alternatives[0].transcript;
           // jQuery('#left').text(j.text.results[i].alternatives[0].transcript);
           console.log(j.text.results[i].alternatives[0].transcript);
+
+          var access = new XMLHttpRequest();
+
+          access.open("POST", "http://130.211.127.78:3033/syntaxnet", true);
+          access.setRequestHeader("content-type", "application/json");
+          access.send(JSON.stringify({
+            input: j.text.results[i].alternatives[0].transcript,
+          }));
+          console.log("hi");
+
+
+          access.onload = function() {
+              if (this.status >= 200 && this.status < 300) {
+                var c = JSON.parse(this.response);
+                console.log("response", c);
+  //               for (var i in c.text.results) {
+  //                 console.log("results syntaxnet 1.0", c.text.results[i]);
+  //                 console.log("results syntaxnet 2.0",  c.text.results[i].alternatives[0].transcript);
+  // }
+              }
+              else{
+                console.log(this.response);
+              }
+
+
+
+          }
         }
 
 
 
         document.getElementById('right').innerHTML = 'HELLO RIGHT WORLD!!!!';
+
+
+
+
+
 
 
 
