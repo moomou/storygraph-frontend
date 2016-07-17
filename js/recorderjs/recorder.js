@@ -166,24 +166,25 @@ DEALINGS IN THE SOFTWARE.
               console.log("response", summary);
               viz(nodes);
 
-              // for (var i = 0; i < c.length; i++) {
-              //   console.log("results syntaxnet 1.0", c[i]);
-              //
-              //
-              // }
+							var description = summary.join(" ")
 
+							var bingAjax = new XMLHttpRequest();
+							bingAjax.open("GET", "http://130.211.127.78:5000/nlp?q=" + description, true);
+							bingAjax.send();
+							bingAjax.onload = function() {
+								if (this.status >= 200 && this.status < 300) {
+									$('#right').append("<img class='row' id='image" + i + "' src='" + this.response + "'></img>");
+								}
+							}
             } else {
               console.log(this.response);
             }
-
-
-
           }
         }
 
+	  
 
-
-        document.getElementById('right').innerHTML = 'HELLO RIGHT WORLD!!!!';
+        
 
 
 
