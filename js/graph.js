@@ -9,6 +9,7 @@ var POS_TO_NAME = {
   "NOUN":  {"id":8, "name":"noun"},
   "NUM":   {"id":9, "name":"numeral"},
   "PART":  {"id":10, "name":"particle"},
+  "PRT":  {"id":10, "name":"particle"},
   "PRON":  {"id":11, "name":"pronoun"},
   "PROPN": {"id":12, "name":"proper noun"},
   "PUNCT": {"id":13, "name":"punctuation"},
@@ -19,13 +20,19 @@ var POS_TO_NAME = {
 };
 
 function viz(graph) {
+  console.log(graph);
   var svg = d3.select("#chart").append("svg:svg"),
       width = 500,
       height = 250;
 
   svg
     .style("width", width)
-    .style("height", height);
+    .style("height", height)
+    .style("opacity", 0.0)
+    .transition()
+    .duration(2000)
+    .style("opacity", 1.0)
+
 
   var color = d3.scaleOrdinal(d3.schemeCategory20);
 
