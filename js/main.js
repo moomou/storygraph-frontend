@@ -47,7 +47,8 @@ function gotBuffers( buffers ) {
 }
 
 function doneEncoding( blob ) {
-    Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
+    // Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
+    Recorder.setupDownload( blob, "audio_wav_file" + ".wav" );
     recIndex++;
     console.log("recIndex", recIndex);
 }
@@ -58,7 +59,6 @@ function toggleRecording( e ) {
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
-        e.classList.add("recording");
     } else {
         initAudio();
 
@@ -70,10 +70,13 @@ function toggleRecording( e ) {
             audioRecorder.clear();
             audioRecorder.record();
 
+            e.classList.remove("blue");
+            e.classList.add("red");
+            e.classList.remove("inverted");
+
             var recordButtonIcon = document.querySelector("#recordButtonIcon");
-            // recordButtonIcon.classList.remove("talk");
             recordButtonIcon.classList.add("outline");
-        }, 500);
+        }, 300);
     }
 }
 

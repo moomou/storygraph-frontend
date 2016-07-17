@@ -107,15 +107,22 @@ DEALINGS IN THE SOFTWARE.
   };
 
   Recorder.setupDownload = function(blob, filename){
-    // var url = (window.URL || window.webkitURL).createObjectURL(blob);
-    var link = document.getElementById("save");
+    var url = (window.URL || window.webkitURL).createObjectURL(blob);
+    // var link = document.getElementById("save");
     // link.href = url;
-    link.download = filename || 'output.wav';
+    // link.download = filename || 'output.wav';
     console.log("filename", filename);
-    // console.log("url", url);
-    // var ajax = new XMLHttpRequest();
-    // ajax.open("POST", "/nlp");
-    // ajax.send(filename);
+    console.log("url", url);
+    var ajax = new XMLHttpRequest();
+    ajax.open("POST", "http://localhost:5000/nlp");
+    ajax.send(filename);
+    ajax.onload = function() {
+      if (this.status >= 200 && this.status < 300) {
+        console.log(this.response);
+      } else {
+        console.log(this.response);
+      }
+    }
 
   }
 
